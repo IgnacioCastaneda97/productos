@@ -19,18 +19,24 @@ public class ProductController {
         return productService.getProduct();
     }
 
+    @GetMapping("/products/buscar/{idProducto}")
+    public Product findProduct(@PathVariable Long idProducto){
+
+        return  productService.findProduct(idProducto);
+    }
+
     //endPoint para crear un Producto
     @PostMapping("/product/crear")
-    public String saveProducto(@RequestBody Product product){
+    public ResponseEntity<String> saveProducto(@RequestBody Product product){
         productService.saveProduct(product);
-        return "El producto fue creado con exito";
+        return ResponseEntity.ok("El producto fue creado con exito");
     }
 
     //EndPoint para borrar un producto
     @DeleteMapping("/product/borrar/{id}")
-    public String deleteProduct(@PathVariable Long id){
+    public ResponseEntity<String> deleteProduct(@PathVariable Long id){
         productService.deleteProduct(id);
-        return "El Producto fue borrado";
+        return ResponseEntity.ok( "El producto se eliminó correctamente");
     }
 
     //EndPoint para modificar un producto
